@@ -1,0 +1,186 @@
+:root {
+    --primary-color: #ff4040;
+    --background-color: #1a3c34;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: var(--background-color);
+    font-family: Arial, sans-serif;
+    color: #fff;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 100px;
+    padding: 10px 0;
+    background-color: var(--background-color);
+    z-index: 100;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+header h1 {
+    font-size: 3.5em;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+header .subtitle {
+    font-size: 1.6em;
+    margin: 5px 0 0 0;
+    color: #FFFFFF;
+    display: inline-block;
+    width: auto;
+}
+
+#hologram-container {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 800px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#sphere {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    background: linear-gradient(to right, #430000, #C80000);
+    transform: perspective(800px) translateZ(150px);
+    animation: pulse 4s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    touch-action: manipulation;
+    backface-visibility: hidden;
+    will-change: transform, background;
+    position: relative;
+    z-index: 200;
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#sphere.recording {
+    background: #FF7200;
+    transform: perspective(800px) translateZ(50px) scale(1.3);
+    animation: pulseRecording 1.5s ease-in-out infinite;
+}
+
+#sphere.releasing {
+    background: linear-gradient(to right, #2F4F4F, #3B7A57);
+    transform: perspective(800px) translateZ(150px);
+    animation: pulseReleasing 1.5s ease-in-out;
+}
+
+#sphere.responding {
+    background: linear-gradient(to right, #2F4F4F, #3B7A57);
+    animation: glow 1.5s ease-in-out;
+}
+
+.rotating-line {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 15vw;
+    height: 2px;
+    background-color: #2E3A2F;
+    transform-origin: 0% 50%;
+    display: none;
+}
+
+#sphere.recording .rotating-line {
+    display: block;
+    animation: rotateLine 2s linear infinite;
+}
+
+@keyframes rotateLine {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: perspective(800px) translateZ(150px) scale(1);
+    }
+
+    50% {
+        transform: perspective(800px) translateZ(150px) scale(1.1);
+    }
+}
+
+@keyframes pulseRecording {
+
+    0%,
+    100% {
+        transform: perspective(800px) translateZ(50px) scale(1.3);
+    }
+
+    50% {
+        transform: perspective(800px) translateZ(50px) scale(1.43);
+    }
+}
+
+@keyframes pulseReleasing {
+    0% {
+        transform: perspective(800px) translateZ(150px) scale(1);
+    }
+
+    50% {
+        transform: perspective(800px) translateZ(150px) scale(1.1);
+    }
+
+    100% {
+        transform: perspective(800px) translateZ(150px) scale(1);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        transform: perspective(800px) translateZ(150px);
+    }
+
+    50% {
+        transform: perspective(800px) translateZ(150px) scale(1.15);
+    }
+}
+
+#history {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: rgba(26,60,52);
+    color: white;
+    padding: 10px;
+    z-index: 300;
+    /* Asegura que esté encima de otros elementos */
+}
+
+#history.active {
+    display: block;
+}
