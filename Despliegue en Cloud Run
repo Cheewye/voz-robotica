@@ -1,0 +1,11 @@
+gcloud run deploy voz-robotica-service \
+  --image gcr.io/voz-robotica/voz-robotica \
+  --region southamerica-east1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --project voz-robotica \
+  --port 8080 \
+  --timeout 300 \
+  --service-account speech-to-text-admin@voz-robotica.iam.gserviceaccount.com \
+  --set-env-vars "SUPERGROK_API_KEY=xai-Q11DdZLTaDISYUV5t6LopjKZWhNnOh3IZhVR5TasPHAr8H7UoCEBWm3NSJSQ5skt4tYj8FzBX5vQHf0w,OPENWEATHER_API_KEY=8da800656a2ef3c4dd6993b378aac445,AZURE_SPEECH_KEY=E4DrljcOHE6ERzjHORv8REHZEpRfkJSuLFMlda5h1wRpm0vjm2ZvJQQJ99BEACZoyfiXJ3w3AAAYACOGWBc7" \
+  --set-secrets "/secrets/google-credentials=google-credentials:latest"

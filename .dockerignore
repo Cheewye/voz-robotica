@@ -1,0 +1,7 @@
+**/__pycache__
+**/.git
+**/.env
+**/*.wav
+**/*.mp3
+**/venv*
+**/tests

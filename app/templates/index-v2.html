@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iURi @maricá</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <div id="hologram-container"></div>
+    <script>
+        console.log('Iniciando carga de iURi...');
+        fetch('/static/iuri-holographic.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Error al cargar iuri-holographic.html: ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                console.log('iuri-holographic.html cargado');
+                document.getElementById('hologram-container').innerHTML = data;
+                const appScript = document.createElement('script');
+                appScript.type = 'module';
+                appScript.src = '/static/js/app_new.js';
+                appScript.async = true;
+                document.body.appendChild(appScript);
+                appScript.onerror = () => console.error('Error al cargar app_new.js');
+                appScript.onload = function () {
+                    console.log('app_new.js cargado');
+                    const uiScript = document.createElement('script');
+                    uiScript.src = '/static/js/script.js';
+                    uiScript.async = true;
+                    document.body.appendChild(uiScript);
+                    uiScript.onerror = () => console.error('Error al cargar script.js');
+                    uiScript.onload = function () {
+                        console.log('script.js cargado');
+                        let attempts = 0;
+                        const maxAttempts = 30;
+                        const interval = setInterval(() => {
+                            const sphere = document.getElementById('sphere');
+                            const toggle = document.getElementById('history-toggle');
+                            if (sphere && toggle && window.app) {
+                                console.log('Esfera y toggle encontrados, registrando eventos');
+                                sphere.addEventListener('touchstart', (e) => {
+                                    console.log('Touchstart en esfera');
+                                    window.app.startRecording();
+                                }, { passive: true });
+                                sphere.addEventListener('touchend', (e) => {
+                                    console.log('Touchend en esfera');
+                                    window.app.stopRecording();
+                                }, { passive: true });
+                                sphere.addEventListener('mousedown', (e) => {
+                                    e.preventDefault();
+                                    console.log('Mousedown en esfera');
+                                    window.app.startRecording();
+                                });
+                                sphere.addEventListener('mouseup', (e) => {
+                                    e.preventDefault();
+                                    console.log('Mouseup en esfera');
+                                    window.app.stopRecording();
+                                });
+                                toggle.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                    console.log('Clic en history-toggle');
+                                    const historyDiv = document.getElementById('history');
+                                    if (historyDiv) {
+                                        historyDiv.classList.toggle('active');
+                                        console.log('Historial toggled, clase active:', historyDiv.classList.contains('active'));
+                                        console.log('Estilo de historial:', window.getComputedStyle(historyDiv).display);
+                                        // Inicializar micrófono al primer clic en toggle
+                                        if (!window.app.hasRequestedPermission) {
+                                            window.app.requestMicrophonePermission();
+                                        }
+                                    } else {
+                                        console.error('Historial no encontrado');
+                                    }
+                                });
+                                toggle.addEventListener('touchstart', (e) => {
+                                    console.log('Touchstart en history-toggle');
+                                    const historyDiv = document.getElementById('history');
+                                    if (historyDiv) {
+                                        historyDiv.classList.toggle('active');
+                                        console.log('Historial toggled, clase active:', historyDiv.classList.contains('active'));
+                                        console.log('Estilo de historial:', window.getComputedStyle(historyDiv).display);
+                                        // Inicializar micrófono al primer toque en toggle
+                                        if (!window.app.hasRequestedPermission) {
+                                            window.app.requestMicrophonePermission();
+                                        }
+                                    } else {
+                                        console.error('Historial no encontrado');
+                                    }
+                                }, { passive: true });
+                                clearInterval(interval);
+                            } else {
+                                attempts++;
+                                console.warn(`Intento ${attempts}: Elementos no encontrados`, { sphere: !!sphere, toggle: !!toggle, app: !!window.app });
+                                if (attempts >= maxAttempts) {
+                                    console.error('No se pudo registrar eventos: elementos no encontrados');
+                                    clearInterval(interval);
+                                }
+                            }
+                        }, 100);
+                    };
+                };
+            })
+            .catch(error => console.error('Error al cargar iuri-holographic.html:', error));
+    </script>
+</body>
+
+</html>

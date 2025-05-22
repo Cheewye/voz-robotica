@@ -1,0 +1,15 @@
+/home/cris/voz_robotica/
+├── app/
+│   ├── static/
+│   │   ├── js/
+│   │   │   └── components/
+│   │   │       ├── audio_recorder.js
+│   │   │       ├── transcription_service.js
+│   │   │       ├── api_client.js
+│   │   │       ├── audio_player.js
+│   │   │       ├── ui_manager.js
+│   │   │       └── app_new.js
+│   └── templates/
+│       └── index-v2.html
+├── run.py
+└── (otros archivos)

@@ -1,0 +1,42 @@
+venv/
+__pycache__/
+*.pyc
+*.mp3
+*.log
+*.env
+secrets/
+google-credentials.json
+# Archivos de certificados y claves
+cert.pem
+key.pem
+
+# Archivos de audio temporales
+audio.wav
+test_audio.wav
+test.webm
+yara_response.mp3
+
+# Archivos de logs y backups
+server_log.txt
+backup/
+
+# Archivos y carpetas específicas del proyecto
+pipewire-audio-check.sh
+check_docker.sh
+create_directories.sh
+create_js_components.sh
+restore_init_files.sh
+conectar-jbl.sh
+alsa-info.sh
+test_env.py
+test_xai_api.py
+test_yara.py
+transcribe_response.json
+iuri_context.json
+activities.json
+supergrok.txt
+source\ venv\ bin\ activate.txt
+systemctl\ --user\ start\ pipewire\ pipewire-pulse\ wireplumber
+
+# Otros archivos sensibles
+credentials.json

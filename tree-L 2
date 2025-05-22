@@ -1,0 +1,75 @@
+(venv) cris@R15:~/voz_robotica$ tree -L 2
+.
+.
+├── activities.json
+├── alsa-info.sh
+├── app
+│   ├── config.py
+│   ├── __init__.py
+│   ├── models
+│   ├── modules
+│   ├── __pycache__
+│   ├── routes
+│   ├── static
+│   ├── templates
+│   └── utils
+├── apptest183.py
+├── appv2.py
+├── appv2quegrokcensuro.py
+├── appv2v2.py
+├── ASCII iURi
+├── backup
+│   ├── appv2.py_20250512_192502.bak
+│   ├── appv2.py_20250512_200638.bak
+│   ├── appv2.py_20250512_201437.bak
+│   ├── appv2.py_20250512_201631.bak
+│   ├── appv2.py_20250512_203012.bak
+│   ├── appv2.py_20250513_052331.bak
+│   └── appv2.py_20250513_055339.bak
+├── backup.sh
+├── cert.pem
+├── check_docker.sh
+├── cloudbuild.yaml
+├── conectar-jbl.sh
+├── create_directories.sh
+├── create_js_components.sh
+├── credentials.json
+├── Despliegue en Cloud Run
+├── Dockerfile
+├── grabacion.webm
+├── iuri_context.json
+├── key.pem
+├── pipewire-audio-check.sh
+├── Plan para uso no lucrativo.txt
+├── __pycache__
+│   └── appv2.cpython-312.pyc
+├── README.md
+├── Reconstruye y despliega.txt
+├── requirements.txt
+├── restore_init_files.sh
+├── run.py
+├── server.py
+├── service.yaml
+├── supergrok.txt
+├── test_audio.wav
+├── test.css
+├── test_env.py
+├── test.wav
+├── test_xai_api.py
+├── test_yara.py
+├── transcribe_response.json
+├── tree-L 2
+├── venv
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   ├── lib64 -> lib
+│   └── pyvenv.cfg
+├── yara_response.mp3
+└── ystemctl --user start pipewire pipewire-pulse wireplumber
+
+16 directories, 51 files
+bash: .: se requiere un argumento de nombre de archivo
+.: modo de empleo: . nombredearchivo [argumentos]
+(venv) cris@R15:~/voz_robotica$ 
+

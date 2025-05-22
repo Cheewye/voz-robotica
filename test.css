@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+#historial {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px auto;
+    width: 80%;
+}
+.mensaje {
+    padding: 5px;
+    margin: 5px 0;
+}
+.error {
+    color: red;
+    border-left: 2px solid red;
+}
+.boton {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

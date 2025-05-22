@@ -1,0 +1,62 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/urls: '["https://voz-robotica-service-445653220525.southamerica-east1.run.app","https://voz-robotica-service-nl3yli4g4q-rj.a.run.app"]'
+  labels:
+    cloud.googleapis.com/location: southamerica-east1
+    run.googleapis.com/satisfiesPzs: 'true'
+  name: voz-robotica-service
+  namespace: '445653220525'
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '40'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 522.0.0
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: bhrfachtaa
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: SUPERGROK_API_KEY
+          value: xai-Q11DdZLTaDISYUV5t6LopjKZWhNnOh3IZhVR5TasPHAr8H7UoCEBWm3NSJSQ5skt4tYj8FzBX5vQHf0w
+        - name: OPENWEATHER_API_KEY
+          value: 8da800656a2ef3c4dd6993b378aac445
+        - name: AZURE_SPEECH_KEY
+          value: E4DrljcOHE6ERzjHORv8REHZEpRfkJSuLFMlda5h1wRpm0vjm2ZvJQQJ99BEACZoyfiXJ3w3AAAYACOGWBc7
+        image: gcr.io/voz-robotica/voz-robotica:latest
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+        volumeMounts:
+        - mountPath: /secrets
+          name: news-api-key-gub-naq-bof
+      serviceAccountName: speech-to-text-admin@voz-robotica.iam.gserviceaccount.com
+      timeoutSeconds: 300
+      volumes:
+      - name: news-api-key-gub-naq-bof
+        secret:
+          items:
+          - key: latest
+            path: news-api-key
+          secretName: news-api-key
+  traffic:
+  - latestRevision: true
+    percent: 100
